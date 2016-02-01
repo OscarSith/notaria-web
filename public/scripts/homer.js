@@ -1,9 +1,3 @@
-/**
- * HOMER - Responsive Admin Theme
- * version 1.8
- *
- */
-
 $(document).ready(function () {
 
     // Add special class to minimalize page elements when screen is less than 768px
@@ -20,57 +14,69 @@ $(document).ready(function () {
     });
 
     // Initialize metsiMenu plugin to sidebar menu
-    var sideMenu = $('#side-menu');
-    if (sideMenu.length) {
-        sideMenu.metisMenu();
-    }
+    // var sideMenu = $('#side-menu');
+    // if (sideMenu.length) {
+    //     sideMenu.metisMenu();
+    // }
 
     // Initialize iCheck plugin
-    $('.i-checks').iCheck({
-        checkboxClass: 'icheckbox_square-green',
-        radioClass: 'iradio_square-green'
-    });
+    var $checks = $('.i-checks');
+    if ($checks.length) {
+        $checks.iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+    }
 
     // Initialize animate panel function
     $('.animate-panel').animatePanel();
 
     // Function for collapse hpanel
-    $('.showhide').click(function (event) {
-        event.preventDefault();
-        var hpanel = $(this).closest('div.hpanel');
-        var icon = $(this).find('i:first');
-        var body = hpanel.find('div.panel-body');
-        var footer = hpanel.find('div.panel-footer');
-        body.slideToggle(300);
-        footer.slideToggle(200);
+    var $showHide = $('.showhide');
+    if ($showHide.length) {
+        $showHide.click(function (event) {
+            event.preventDefault();
+            var hpanel = $(this).closest('div.hpanel');
+            var icon = $(this).find('i:first');
+            var body = hpanel.find('div.panel-body');
+            var footer = hpanel.find('div.panel-footer');
+            body.slideToggle(300);
+            footer.slideToggle(200);
 
-        // Toggle icon from up to down
-        icon.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
-        hpanel.toggleClass('').toggleClass('panel-collapse');
-        setTimeout(function () {
-            hpanel.resize();
-            hpanel.find('[id^=map-]').resize();
-        }, 50);
-    });
+            // Toggle icon from up to down
+            icon.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+            hpanel.toggleClass('').toggleClass('panel-collapse');
+            setTimeout(function () {
+                hpanel.resize();
+                hpanel.find('[id^=map-]').resize();
+            }, 50);
+        });
+    }
 
     // Function for close hpanel
-    $('.closebox').click(function (event) {
-        event.preventDefault();
-        var hpanel = $(this).closest('div.hpanel');
-        hpanel.remove();
-    });
+    var $closeBox = $('.closebox');
+    if ($closeBox.length) {
+        $closeBox.click(function (event) {
+            event.preventDefault();
+            var hpanel = $(this).closest('div.hpanel');
+            hpanel.remove();
+        });
+    }
 
     // Fullscreen for fullscreen hpanel
-    $('.fullscreen').click(function() {
-        var hpanel = $(this).closest('div.hpanel');
-        var icon = $(this).find('i:first');
-        $('body').toggleClass('fullscreen-panel-mode');
-        icon.toggleClass('fa-expand').toggleClass('fa-compress');
-        hpanel.toggleClass('fullscreen');
-        setTimeout(function() {
-            $(window).trigger('resize');
-        }, 100);
-    });
+    var $fullscreen = $('.fullscreen');
+    if ($fullscreen.length) {
+        $fullscreen.click(function() {
+            var hpanel = $(this).closest('div.hpanel');
+            var icon = $(this).find('i:first');
+            $('body').toggleClass('fullscreen-panel-mode');
+            icon.toggleClass('fa-expand').toggleClass('fa-compress');
+            hpanel.toggleClass('fullscreen');
+            setTimeout(function() {
+                $(window).trigger('resize');
+            }, 100);
+        });
+    }
 
     // Open close right sidebar
     $('.right-sidebar-toggle').click(function () {
@@ -115,7 +121,16 @@ $(document).ready(function () {
     // Move modal to body
     // Fix Bootstrap backdrop issu with animation.css
     $('.modal').appendTo("body")
-
+});
+$.ajax({
+    url: 'master-tables',
+    type: 'get',
+    dataType: 'json'
+}).done(function(rec) {
+    console.info(rec);
+}).fail(function(e,d) {
+    console.error(e);
+    console.error(d);
 });
 
 $(window).bind("load", function () {
@@ -209,5 +224,4 @@ $.fn['animatePanel'] = function() {
         $('.stagger').css('animation', '');
         $('.stagger').removeClass(effect).removeClass('animated-panel').removeClass('stagger');
     }, animateTime)
-
 };

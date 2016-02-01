@@ -31,4 +31,7 @@ Route::group(['middleware' => 'web'], function ($route) {
     $route->auth();
 
     $route->get('/', 'HomeController@index');
+
+    // AJAX
+    $route->get('master-tables', 'HomeController@getMasterOfTables');
 });

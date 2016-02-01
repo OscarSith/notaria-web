@@ -16,7 +16,7 @@ class CreateProtestosTable extends Migration
             $table->increments('id');
             // Protesto
             $table->char('pro_periodo', 4);
-            $table->char('pro_titulo', 4); // tabla de tablas letra, factura pagaré, warrant...
+            $table->char('pro_titulo', 4); // tabla de tablas letra, factura, pagaré, warrant...
             $table->string('pro_dcmto_numero', 30);
             $table->char('pro_moneda', 4); // tabla de tablas PEN, USD
             $table->double('pro_importe', 12, 3);
