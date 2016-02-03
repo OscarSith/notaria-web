@@ -15,8 +15,8 @@ class CreateUbigeoTable extends Migration
         Schema::create('ubigeo', function (Blueprint $table) {
             $table->increments('id');
             $table->string('codigo', 6);
-            $table->char('master', 4);
-            $table->char('parent_id', 4);
+            $table->char('master', 5);
+            $table->char('parent_id', 5);
             $table->string('nombre');
             $table->timestamps();
         });
