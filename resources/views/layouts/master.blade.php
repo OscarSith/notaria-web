@@ -9,19 +9,20 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!--<link rel="shortcut icon" type="image/ico" href="favicon.ico" />-->
 
-    <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="vendor/metisMenu/dist/metisMenu.css" />
-    <link rel="stylesheet" href="vendor/animate.css/animate.css" />
-    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/font-awesome.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/metisMenu/dist/metisMenu.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/animate.css/animate.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css') }}">
 
-    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />
-    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/helper.css" />
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="{{ asset('fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css') }}" />
+    <link rel="stylesheet" href="{{ asset('fonts/pe-icon-7-stroke/css/helper.css') }}" />
+    <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
 </head>
 <body>
 
 <!-- Simple splash screen-->
-<div class="splash"> <div class="color-line"></div><div class="splash-title"><h1>Homer - Responsive Admin Theme</h1><p>Special AngularJS Admin Theme for small and medium webapp with very clean and aesthetic style and feel. </p><img src="images/loading-bars.svg" width="64" height="64" /> </div> </div>
+<div class="splash"> <div class="color-line"></div><div class="splash-title"><h1>Homer - Responsive Admin Theme</h1><p>Special AngularJS Admin Theme for small and medium webapp with very clean and aesthetic style and feel. </p><img src="{{ asset('images/loading-bars.svg') }}" width="64" height="64" /> </div> </div>
 <!--[if lt IE 7]>
 <p class="alert alert-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -29,9 +30,7 @@
 <header id="header">
     <div class="color-line"></div>
     <div id="logo" class="light-version">
-        <span>
-            Homer Theme
-        </span>
+        <span>Homer Theme</span>
     </div>
     <nav role="navigation">
         <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
@@ -167,10 +166,10 @@
     <div id="navigation">
         <ul class="nav" id="side-menu">
             <li class="active">
-                <a href="#"> <span class="nav-label">Protestos</span></a>
+                <a href="{{ route('protestos') }}"> <span class="nav-label">Protestos</span></a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-user fa-fw"></i> <span class="nav-label">Personas</span></a>
+                <a href="{{ route('persona') }}"><i class="fa fa-user fa-fw"></i> <span class="nav-label">Personas</span></a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-file-text fa-fw"></i> <span class="nav-label">Reportes</span></a>
@@ -187,7 +186,7 @@
 </aside>
 <div id="wrapper">
 
-    <div class="content animate-panel">
+    <div class="animate-panel">
 	@section('content')
     @show
     </div>
@@ -230,7 +229,7 @@
                 <div class="social-talk">
                     <div class="media social-profile clearfix">
                         <a class="pull-left">
-                            <img src="images/a1.jpg" alt="profile-picture">
+                            <img src="{{ asset('images/a1.jpg') }}" alt="profile-picture">
                         </a>
 
                         <div class="media-body">
@@ -245,7 +244,7 @@
                 <div class="social-talk">
                     <div class="media social-profile clearfix">
                         <a class="pull-left">
-                            <img src="images/a3.jpg" alt="profile-picture">
+                            <img src="{{ asset('images/a3.jpg') }}" alt="profile-picture">
                         </a>
 
                         <div class="media-body">
@@ -260,7 +259,7 @@
                 <div class="social-talk">
                     <div class="media social-profile clearfix">
                         <a class="pull-left">
-                            <img src="images/a4.jpg" alt="profile-picture">
+                            <img src="{{ asset('images/a4.jpg') }}" alt="profile-picture">
                         </a>
 
                         <div class="media-body">
@@ -313,10 +312,14 @@
         Company 2015-2020
     </footer>
 </div>
-
-<script src="vendor/jquery/dist/jquery.min.js"></script>
-<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="scripts/homer.js"></script>
+<script>
+    var url_root = '{{ asset('/') }}'
+</script>
+<script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendor/iCheck/icheck.min.js') }}"></script>
+<script src="{{ asset('vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('scripts/homer.js') }}"></script>
 <script>
     // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     //     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

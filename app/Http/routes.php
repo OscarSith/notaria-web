@@ -23,15 +23,22 @@ Route::get('ubigeo', 'PruebaController@ubigeo');
 |
 */
 
-// Route::group(['middleware' => ['web']], function () {
-//     //
-// });
+Route::group(['middleware' => ['web', 'guest']], function($route) {
 
-Route::group(['middleware' => 'web'], function ($route) {
-    $route->auth();
+	$route->get('login', 'Auth\AuthController@showLoginForm');
+	$route->post('login', 'Auth\AuthController@login');
 
-    $route->get('/', 'HomeController@index');
+});
+
+Route::group(['middleware' => ['web', 'auth']], function ($route) {
+
+    $route->get('/', 'HomeController@index')->name('protestos');
+    $route->get('persona', 'PersonaController@index')->name('persona');
+    $route->get('persona/create', 'PersonaController@create')->name('add-persona');
 
     // AJAX
     $route->get('master-tables', 'HomeController@getMasterOfTables');
+
+    $this->get('logout', 'Auth\AuthController@logout');
+
 });

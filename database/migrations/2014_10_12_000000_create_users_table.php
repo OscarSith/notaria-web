@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->string('email')->unique();
+            $table->string('numero_documento', 20)->unique();
             $table->string('password', 60);
             $table->tinyInteger('state')->default(1);
             $table->integer('cargo_id')->unsigned();

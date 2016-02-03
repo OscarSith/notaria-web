@@ -146,7 +146,7 @@ class MasterOfTableTableSeeder extends Seeder
 	        	'ttb_val1' => 'Sin Aval',
 	        ],
 
-	    // Tipo clase
+	    // Estado protesto
 	    	[
 	        	'ttb_tipo' => '0080',
 	        	'ttb_arg' => '0001',

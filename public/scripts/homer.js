@@ -1,3 +1,4 @@
+var master_of_tables = [];
 $(document).ready(function () {
 
     // Add special class to minimalize page elements when screen is less than 768px
@@ -19,17 +20,10 @@ $(document).ready(function () {
     //     sideMenu.metisMenu();
     // }
 
-    // Initialize iCheck plugin
-    var $checks = $('.i-checks');
-    if ($checks.length) {
-        $checks.iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green'
-        });
-    }
-
     // Initialize animate panel function
     $('.animate-panel').animatePanel();
+
+    ichecks();
 
     // Function for collapse hpanel
     var $showHide = $('.showhide');
@@ -122,16 +116,87 @@ $(document).ready(function () {
     // Fix Bootstrap backdrop issu with animation.css
     $('.modal').appendTo("body")
 });
-$.ajax({
-    url: 'master-tables',
-    type: 'get',
-    dataType: 'json'
-}).done(function(rec) {
-    console.info(rec);
-}).fail(function(e,d) {
-    console.error(e);
-    console.error(d);
-});
+
+if ( ! sessionStorage.hasOwnProperty('master') ) {
+    $.ajax({
+        url: url_root + 'master-tables',
+        type: 'get',
+        dataType: 'json'
+    }).done(function(rec) {
+        sessionStorage.setItem('master', JSON.stringify(rec));
+        master_of_tables = rec;
+    }).fail(function(e,d) {
+        console.log(e);
+        console.log(d);
+    });
+} else {
+    master_of_tables = $.parseJSON(sessionStorage.getItem('master'));
+}
+
+var tipo_doc = [], sexo = [], tipo_per = [], nacion = [], moneda = [], prot_titulo = [], clase = [], pro_estado = [];
+for (var i = 0; i < master_of_tables.length; i++) {
+    if (master_of_tables[i].ttb_tipo == '0010') {
+        tipo_doc.push(master_of_tables[i]);
+    }
+    else if (master_of_tables[i].ttb_tipo == '0020'){
+        sexo.push(master_of_tables[i]);
+    }
+    else if (master_of_tables[i].ttb_tipo == '0030') {
+        tipo_per.push(master_of_tables[i]);
+    }
+    else if (master_of_tables[i].ttb_tipo == '0040') {
+        nacion.push(master_of_tables[i]);
+    }
+    else if (master_of_tables[i].ttb_tipo == '0050') {
+        moneda.push(master_of_tables[i]);
+    }
+    else if (master_of_tables[i].ttb_tipo == '0060') {
+        prot_titulo.push(master_of_tables[i]);
+    }
+    else if (master_of_tables[i].ttb_tipo == '0070') {
+        clase.push(master_of_tables[i]);
+    }
+    else if (master_of_tables[i].ttb_tipo == '0080') {
+        pro_estado.push(master_of_tables[i]);
+    }
+}
+
+var selected = '<option>Seleccione</option>';
+var $per_dcmto_tipo = $('#per_dcmto_tipo');
+if ($per_dcmto_tipo.length) {
+    var options = selected;
+    for (var i = 0; i < tipo_doc.length; i++) {
+        options += '<option value="' + tipo_doc[i].ttb_arg + '">' + tipo_doc[i].ttb_val1 + '</option>';
+    }
+    $per_dcmto_tipo.html(options);
+}
+
+var $per_tipo = $('#per_tipo');
+if ($per_tipo.length) {
+    var checks = '';
+    for (var i = 0; i < tipo_per.length; i++) {
+        checks += '<label class="radio-inline"><input type="radio" name="per_tipo" value="' + tipo_per[i].ttb_arg + '" class="i-checks"> ' + tipo_per[i].ttb_val1 + '</label>';
+    }
+    $per_tipo.html(checks);
+}
+
+var $per_nacion = $('#per_nacion');
+if ($per_nacion.length) {
+    var options = selected;
+    for (var i = 0; i < nacion.length; i++) {
+        options += '<option value="' + nacion[i].ttb_arg + '">' + nacion[i].ttb_val1 + '</option>';
+    }
+    $per_nacion.html(options);
+}
+
+var $per_sexo = $('#per_sexo');
+if ($per_sexo.length) {
+    var options = selected;
+    for (var i = 0; i < sexo.length; i++) {
+        options += '<option value="' + sexo[i].ttb_arg + '">' + sexo[i].ttb_val1 + '</option>';
+    }
+    $per_sexo.html(options);
+}
 
 $(window).bind("load", function () {
     // Remove splash screen after load
@@ -182,6 +247,16 @@ function setBodySmall() {
     }
 }
 
+// Initialize iCheck plugin
+function ichecks () {
+    var $checks = $('.i-checks');
+    if ($checks.length) {
+        $checks.iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+    }
+}
 // Animate panel function
 $.fn['animatePanel'] = function() {
 

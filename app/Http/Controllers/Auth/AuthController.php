@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Entities\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -29,6 +29,12 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+
+    /**
+     * En vez de email (que es por defecto), uso este campo como login.
+     * @var string
+     */
+    protected $username = 'numero_documento';
 
     /**
      * Create a new authentication controller instance.

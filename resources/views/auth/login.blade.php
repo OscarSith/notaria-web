@@ -41,14 +41,13 @@
             <div class="hpanel">
                 <div class="panel-body">
                         <form id="loginForm" role="form" method="POST" action="{{ url('/login') }}">
-                            {!! csrf_field() !!}
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('numero_documento') ? ' has-error' : '' }}">
                                 <label class="control-label" for="username">Username</label>
-                                <input type="text" placeholder="example@gmail.com" title="Please enter you username" required name="email" id="username" class="form-control">
+                                <input type="text" placeholder="7252651" title="Please enter you DNI" required name="numero_documento" id="username" class="form-control">
                                 <span class="help-block small">Your unique username to app</span>
-                                @if ($errors->has('email'))
+                                @if ($errors->has('numero_documento'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('numero_documento') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -87,8 +86,19 @@
 <script src="vendor/jquery/dist/jquery.min.js"></script>
 <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="vendor/iCheck/icheck.min.js"></script>
+<script type="text/javascript">
+    $(window).bind("load", function () {
+        // Remove splash screen after load
+        $('.splash').css('display', 'none')
+    });
 
-<!-- App scripts -->
-<script src="scripts/homer.js"></script>
+    var $checks = $('.i-checks');
+    if ($checks.length) {
+        $checks.iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+    }
+</script>
 </body>
 </html>
