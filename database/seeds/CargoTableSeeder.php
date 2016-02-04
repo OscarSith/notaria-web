@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Cargo;
+use App\Entities\Cargo;
 
 class CargoTableSeeder extends Seeder
 {

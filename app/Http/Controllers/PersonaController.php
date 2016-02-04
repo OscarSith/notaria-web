@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\PersonaRepo;
+use App\Entities\Ubigeo;
 
 class PersonaController extends Controller
 {
@@ -24,13 +25,19 @@ class PersonaController extends Controller
     public function index()
     {
         $personas = $this->personaRepo->getAll();
-     //    dd($personas->first()->full_name . ' ' . $personas->first()->full_lastname);
-    	// dd($personas);
         return view('persona', compact('personas'));
     }
 
     public function create()
     {
-        return view('persona-create');
+        $departamentos = Ubigeo::getByParentId('00000');
+        return view('persona-create', compact('departamentos'));
+    }
+
+    public function ubigeo(Request $request, $parent_id)
+    {
+        $departamentos = Ubigeo::getByParentId($parent_id);
+
+        return response()->json($departamentos);
     }
 }

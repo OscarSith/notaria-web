@@ -177,7 +177,11 @@ if ($per_tipo.length) {
     for (var i = 0; i < tipo_per.length; i++) {
         checks += '<label class="radio-inline"><input type="radio" name="per_tipo" value="' + tipo_per[i].ttb_arg + '" class="i-checks"> ' + tipo_per[i].ttb_val1 + '</label>';
     }
-    $per_tipo.html(checks);
+    $per_tipo.html(checks).on('click', 'radio', function() {
+        var $this = $(this),
+            value = $this.val();
+        console.info(value);
+    });
 }
 
 var $per_nacion = $('#per_nacion');
@@ -198,9 +202,27 @@ if ($per_sexo.length) {
     $per_sexo.html(options);
 }
 
+var $departamento = $('#departamento');
+if ($departamento.length) {
+    $.merge($departamento, $('#provincia')).on('change', function() {
+        var $this = $(this),
+            valor = $this.val(),
+            $content = $($this.data('destity'))
+            options = '<option>-Seleccione-</option>';
+
+        $.getJSON(url_root + 'get-ubigeo-by-parent/' + valor, {}, function(rec) {
+            for (var i = 0; i < rec.length; i++) {
+                options += '<option value="' + rec[i].master + '">' + rec[i].nombre + '</option>';
+            }
+
+            $content.html(options);
+        });
+    });
+}
+
 $(window).bind("load", function () {
     // Remove splash screen after load
-    $('.splash').css('display', 'none')
+    $('.splash').css('display', 'none');
 });
 
 $(window).bind("resize click", function () {
