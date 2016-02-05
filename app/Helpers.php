@@ -9,6 +9,7 @@ class Helpers
 			'ttb_arg',
 			'ttb_tipo',
 			'ttb_val1',
+			'ttb_val2',
 		]);
 	}
 }

@@ -35,6 +35,8 @@ Route::group(['middleware' => ['web', 'auth']], function ($route) {
     $route->get('/', 'HomeController@index')->name('protestos');
     $route->get('persona', 'PersonaController@index')->name('persona');
     $route->get('persona/create', 'PersonaController@create')->name('add-persona');
+    $route->get('persona/edit/{id}', 'PersonaController@edit')->name('edit-persona');
+    $route->post('persona/store', 'PersonaController@store')->name('store-persona');
 
     // AJAX
     $route->get('master-tables', 'HomeController@getMasterOfTables');

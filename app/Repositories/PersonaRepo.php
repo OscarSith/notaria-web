@@ -9,20 +9,38 @@ class PersonaRepo extends Persona
 	{
 		return Persona::actives()->latest()->paginate($limit, [
 			'id',
+			'per_tipo',
+			'per_nacion',
+			'per_dcmto_tipo',
 			'per_nombre1',
 			'per_nombre2',
 			'per_ape_paterno',
 			'per_ape_materno',
 			'per_dcmto_numero',
-			'per_sexo'
+			'per_sexo',
+			'per_razon_social',
+			'per_ruc'
 		]);
 	}
 
-	public function add($values)
+	public function add($values, $user_id)
 	{
 		$persona = new Persona();
+		$alfabetico = '';
+		if ($values['per_tipo'] == '0001') {
+			$alfabetico = $values['per_nombre1'] . ' ' . $values['per_nombre2'] . ' ' . $values['per_ape_paterno'] . ' ' . $values['per_ape_materno'] . ' ' . $values['per_dcmto_numero'];
+		} else {
+			$alfabetico = $values['per_razon_social'] . ' ' . $values['per_ruc'];
+		}
+		$persona->per_alfabetico = $alfabetico;
+		$persona->per_crea_user = $user_id;
 		$persona->fill($values);
 
 		return $persona->save();
+	}
+
+	public function getById($id)
+	{
+		return Persona::find($id);
 	}
 }

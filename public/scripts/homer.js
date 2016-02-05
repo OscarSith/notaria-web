@@ -161,45 +161,108 @@ for (var i = 0; i < master_of_tables.length; i++) {
     }
 }
 
+var $listPersonas = $('#tbl-personas');
+if ($listPersonas.length) {
+    var arrData = [],
+        $rows = $listPersonas.find('tbody tr'),
+        $cells = [];
+
+    for (var i = 0; i < $rows.length; i++) {
+        $cells = $($rows[i]).children();
+        for (var j = 0; j < tipo_per.length; j++) {
+            if (tipo_per[j].ttb_arg == $cells.first().text().trim()) {
+                $cells.first().html(tipo_per[j].ttb_val2);
+            }
+        }
+
+        for (var n = 0; n < nacion.length; n++) {
+            if (nacion[n].ttb_arg == $cells.eq(3).text().trim()) {
+                $cells.eq(3).html(nacion[n].ttb_val1);
+            }
+        }
+
+        for (var g = 0; g < tipo_doc.length; g++) {
+            if (tipo_doc[g].ttb_arg == $cells.eq(4).text().trim()) {
+                $cells.eq(4).html(tipo_doc[g].ttb_val2);
+                break;
+            }
+        }
+    }
+}
+
 var selected = '<option>Seleccione</option>';
 var $per_dcmto_tipo = $('#per_dcmto_tipo');
 if ($per_dcmto_tipo.length) {
-    var options = selected;
+    var options = selected,
+        edit = $per_dcmto_tipo.data('tipodoc');
+
     for (var i = 0; i < tipo_doc.length; i++) {
         options += '<option value="' + tipo_doc[i].ttb_arg + '">' + tipo_doc[i].ttb_val1 + '</option>';
     }
     $per_dcmto_tipo.html(options);
+
+    if (edit) {
+        $per_dcmto_tipo.val(edit);
+    }
 }
 
 var $per_tipo = $('#per_tipo');
 if ($per_tipo.length) {
-    var checks = '';
+    var checks = '',
+        edit = $per_tipo.data('tipoper');
+
     for (var i = 0; i < tipo_per.length; i++) {
         checks += '<label class="radio-inline"><input type="radio" name="per_tipo" value="' + tipo_per[i].ttb_arg + '" class="i-checks"> ' + tipo_per[i].ttb_val1 + '</label>';
     }
-    $per_tipo.html(checks).on('click', 'radio', function() {
-        var $this = $(this),
+    $per_tipo.html(checks).on('ifChecked', function(e) {
+        var $this = $(e.target),
             value = $this.val();
-        console.info(value);
+
+        if (value == '0001') {
+            $('#per-natural-controls').removeClass('hidden').find(':input').prop('disabled', false);
+            $('#per-juridico-controls').addClass('hidden').find(':input').prop('disabled', true);
+        } else {
+            $('#per-natural-controls').addClass('hidden').find(':input').prop('disabled', true);
+            $('#per-juridico-controls').removeClass('hidden').find(':input').prop('disabled', false);
+        }
+
+        var $btnAddPersona = $('#btn-add-persona');
+        if ($btnAddPersona.is(':disabled')) {
+            $btnAddPersona.prop('disabled', false);
+        }
     });
+
+    if (edit) {
+        $(':radio[value=' + edit + ']').iCheck('check');
+    }
 }
 
 var $per_nacion = $('#per_nacion');
 if ($per_nacion.length) {
-    var options = selected;
+    var options = selected,
+        edit = $per_nacion.data('nacion');
     for (var i = 0; i < nacion.length; i++) {
         options += '<option value="' + nacion[i].ttb_arg + '">' + nacion[i].ttb_val1 + '</option>';
     }
     $per_nacion.html(options);
+
+    if (edit) {
+        $per_nacion.val(edit);
+    }
 }
 
 var $per_sexo = $('#per_sexo');
 if ($per_sexo.length) {
-    var options = selected;
+    var options = selected,
+        edit = $per_sexo.data('sexo');
     for (var i = 0; i < sexo.length; i++) {
         options += '<option value="' + sexo[i].ttb_arg + '">' + sexo[i].ttb_val1 + '</option>';
     }
     $per_sexo.html(options);
+
+    if (edit) {
+        $per_sexo.val(edit);
+    }
 }
 
 var $departamento = $('#departamento');
@@ -207,12 +270,19 @@ if ($departamento.length) {
     $.merge($departamento, $('#provincia')).on('change', function() {
         var $this = $(this),
             valor = $this.val(),
-            $content = $($this.data('destity'))
-            options = '<option>-Seleccione-</option>';
+            destiny = $this.data('destity'),
+            $content = $(destiny)
+            options = '<option>-Seleccione-</option>',
+            optionValue = '';
 
         $.getJSON(url_root + 'get-ubigeo-by-parent/' + valor, {}, function(rec) {
             for (var i = 0; i < rec.length; i++) {
-                options += '<option value="' + rec[i].master + '">' + rec[i].nombre + '</option>';
+                if (destiny == '#distrito') {
+                    optionValue = rec[i].id;
+                } else {
+                    optionValue = rec[i].master;
+                }
+                options += '<option value="' + optionValue + '">' + rec[i].nombre + '</option>';
             }
 
             $content.html(options);

@@ -158,6 +158,7 @@ return [
 
         // Terceros
         'Maatwebsite\Excel\ExcelServiceProvider',
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -206,6 +207,8 @@ return [
 
         // Terceros
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
 
 ];

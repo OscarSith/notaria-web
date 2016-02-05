@@ -6,14 +6,14 @@
 			<div class="col-sm-12">
 				<div class="hpanel">
 					<div class="panel-heading">
-						<span>REGISTRAR PERSONA NATURAL – JURIDICA</span>
+						<span>ACTUALIZAR PERSONA NATURAL – JURIDICA</span>
 					</div>
 					<div class="panel-body">
-						{!! Form::open(array('route' => 'store-persona', 'method' => 'post', 'class' => 'form-horizontal')) !!}
+						{!! Form::model($persona, array('route' => 'store-persona', 'method' => 'put', 'class' => 'form-horizontal')) !!}
 							@include ('partials.persona-form')
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
-									<button class="btn btn-success" id="btn-add-persona" disabled>Agregar</button>
+									<button class="btn btn-success" id="btn-add-persona">Actualizar</button>
 								</div>
 							</div>
 						{!! Form::close() !!}

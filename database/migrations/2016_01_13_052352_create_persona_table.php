@@ -16,14 +16,14 @@ class CreatePersonaTable extends Migration
             $table->increments('id');
             // Natural
             $table->char('per_tipo', 4); // JUridico o natural
-            $table->char('per_nacion', 4);
-            $table->char('per_dcmto_tipo', 4);
-            $table->char('per_sexo', 4);
+            $table->char('per_nacion', 4)->nullable();
+            $table->char('per_dcmto_tipo', 4)->nullable();
+            $table->char('per_sexo', 4)->nullable();
             $table->string('per_dcmto_numero', 40)->nullable();
             $table->string('per_ruc', 40)->nullable();
-            $table->string('per_ape_paterno', 120);
-            $table->string('per_ape_materno', 120);
-            $table->string('per_nombre1', 120);
+            $table->string('per_ape_paterno', 120)->nullable();
+            $table->string('per_ape_materno', 120)->nullable();
+            $table->string('per_nombre1', 120)->nullable();
             $table->string('per_nombre2', 120)->nullable();
             $table->date('per_fe_naci');
 

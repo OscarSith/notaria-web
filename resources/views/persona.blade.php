@@ -23,11 +23,15 @@
     			<div class="hpanel">
     				<div class="panel-body">
     					<div class="table-responsive">
-    						<table class="table table-condensed table-striped">
+    						{{ $personas->render() }}
+    						<table class="table table-condensed table-striped table-hover" id="tbl-personas">
     							<thead>
     								<tr>
-    									<th>Nombres</th>
-    									<th>Apellidos</th>
+    									<th>Tipo</th>
+    									<th>Nombres / Razon</th>
+    									<th>Apellidos / Ruc</th>
+    									<th>Nacionalidad</th>
+    									<th>Tipo Doc.</th>
     									<th>Numero</th>
     									<th>Acciones</th>
     								</tr>
@@ -36,6 +40,7 @@
     								@each('partials.personas-list', $personas, 'persona', 'partials.personas-list-empty')
     							</tbody>
     						</table>
+    						{{ $personas->render() }}
     					</div>
     				</div>
     			</div>

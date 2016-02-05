@@ -34,6 +34,22 @@ class PersonaController extends Controller
         return view('persona-create', compact('departamentos'));
     }
 
+    public function store(Request $request)
+    {
+        if ($this->personaRepo->add($request->all(), \Auth::user()->id)) {
+            return redirect()->route('persona')->with(['success_message' => 'Persona agregada con exito.']);
+        }
+
+        return redirect()->back();
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $persona = $this->personaRepo->getById($id);
+        $departamentos = Ubigeo::getByParentId('00000');
+        return view('persona-edit', ['persona' => $persona, 'departamentos' => $departamentos]);
+    }
+
     public function ubigeo(Request $request, $parent_id)
     {
         $departamentos = Ubigeo::getByParentId($parent_id);
