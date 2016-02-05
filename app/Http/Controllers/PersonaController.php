@@ -50,6 +50,15 @@ class PersonaController extends Controller
         return view('persona-edit', ['persona' => $persona, 'departamentos' => $departamentos]);
     }
 
+    public function update(Request $request, $id)
+    {
+        if ($this->personaRepo->edit($request->all(), $id)) {
+            return redirect()->route('persona')->with(['success_message' => 'Persona editada con exito.']);
+        }
+
+        return redirect()->back();
+    }
+
     public function ubigeo(Request $request, $parent_id)
     {
         $departamentos = Ubigeo::getByParentId($parent_id);

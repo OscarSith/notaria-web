@@ -9,7 +9,7 @@
 						<span>ACTUALIZAR PERSONA NATURAL – JURIDICA</span>
 					</div>
 					<div class="panel-body">
-						{!! Form::model($persona, array('route' => 'store-persona', 'method' => 'put', 'class' => 'form-horizontal')) !!}
+						{!! Form::model($persona, array('route' => ['update-persona', $persona->id], 'method' => 'put', 'class' => 'form-horizontal')) !!}
 							@include ('partials.persona-form')
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">

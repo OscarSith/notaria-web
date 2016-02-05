@@ -65,29 +65,31 @@
 	</div>
 </div>
 <div class="hr-line-dashed"></div>
-<div class="form-group">
-	<label class="control-label col-sm-2">Departamento</label>
-	<div class="col-sm-2">
-		<select id="departamento" class="form-control" data-destity="#provincia">
-			<option>-Seleccione-</option>
-			@foreach ($departamentos as $departamento)
-				<option value="{{ $departamento->master }}">{{ $departamento->nombre }}</option>
-			@endforeach
-		</select>
+@if (!isset($persona))
+	<div class="form-group">
+		<label class="control-label col-sm-2">Departamento</label>
+		<div class="col-sm-2">
+			<select id="departamento" class="form-control" data-destity="#provincia">
+				<option>-Seleccione-</option>
+				@foreach ($departamentos as $departamento)
+					<option value="{{ $departamento->master }}">{{ $departamento->nombre }}</option>
+				@endforeach
+			</select>
+		</div>
+		<label class="control-label col-sm-2">Provincia</label>
+		<div class="col-sm-2">
+			<select id="provincia" class="form-control" data-destity="#distrito">
+				<option>-Seleccione-</option>
+			</select>
+		</div>
+		<label class="control-label col-sm-2">Distrito</label>
+		<div class="col-sm-2">
+			<select id="distrito" class="form-control" name="per_ubg_id">
+				<option>-Seleccione-</option>
+			</select>
+		</div>
 	</div>
-	<label class="control-label col-sm-2">Provincia</label>
-	<div class="col-sm-2">
-		<select id="provincia" class="form-control" data-destity="#distrito">
-			<option>-Seleccione-</option>
-		</select>
-	</div>
-	<label class="control-label col-sm-2">Distrito</label>
-	<div class="col-sm-2">
-		<select id="distrito" class="form-control" name="per_ubg_id">
-			<option>-Seleccione-</option>
-		</select>
-	</div>
-</div>
+@endif
 <div class="form-group">
 	<label class="control-label col-sm-2">Dirección</label>
 	<div class="col-sm-10">

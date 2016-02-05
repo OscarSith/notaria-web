@@ -26,13 +26,7 @@ class PersonaRepo extends Persona
 	public function add($values, $user_id)
 	{
 		$persona = new Persona();
-		$alfabetico = '';
-		if ($values['per_tipo'] == '0001') {
-			$alfabetico = $values['per_nombre1'] . ' ' . $values['per_nombre2'] . ' ' . $values['per_ape_paterno'] . ' ' . $values['per_ape_materno'] . ' ' . $values['per_dcmto_numero'];
-		} else {
-			$alfabetico = $values['per_razon_social'] . ' ' . $values['per_ruc'];
-		}
-		$persona->per_alfabetico = $alfabetico;
+		$persona->per_alfabetico = $this->setAlfabetico($values);
 		$persona->per_crea_user = $user_id;
 		$persona->fill($values);
 
@@ -42,5 +36,26 @@ class PersonaRepo extends Persona
 	public function getById($id)
 	{
 		return Persona::find($id);
+	}
+
+	public function edit($values, $id)
+	{
+		$persona = $this->getById($id);
+		$persona->fill($values);
+		$persona->per_alfabetico = $this->setAlfabetico($values);
+		$persona->per_act_user = $id;
+		return $persona->save();
+	}
+
+	private function setAlfabetico($values)
+	{
+		$alfabetico = '';
+		if ($values['per_tipo'] == '0001') {
+			$alfabetico = $values['per_nombre1'] . ' ' . $values['per_nombre2'] . ' ' . $values['per_ape_paterno'] . ' ' . $values['per_ape_materno'] . ' ' . $values['per_dcmto_numero'];
+		} else {
+			$alfabetico = $values['per_razon_social'] . ' ' . $values['per_ruc'];
+		}
+
+		return $alfabetico;
 	}
 }
