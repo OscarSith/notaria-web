@@ -33,6 +33,8 @@ Route::group(['middleware' => ['web', 'guest']], function($route) {
 Route::group(['middleware' => ['web', 'auth']], function ($route) {
 
     $route->get('/', 'HomeController@index')->name('protestos');
+    $route->post('add-protesto', 'ProtestoController@store')->name('addProtesto');
+
     $route->get('persona', 'PersonaController@index')->name('persona');
     $route->get('persona/create', 'PersonaController@create')->name('add-persona');
     $route->get('persona/edit/{id}', 'PersonaController@edit')->name('edit-persona');
