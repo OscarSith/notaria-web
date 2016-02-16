@@ -293,6 +293,17 @@ if ($departamento.length) {
     });
 }
 
+var $pro_tipo_per = $('#pro_tipo_per');
+if ($pro_tipo_per.length) {
+    var options = selected;
+
+    for (var i = 0; i < tipo_per.length; i++) {
+        options += '<option value="' + tipo_per[i].ttb_arg + '">' + tipo_per[i].ttb_val1 + '</option>';
+    }
+
+    $pro_tipo_per.html(options);
+}
+
 $(window).bind("load", function () {
     // Remove splash screen after load
     $('.splash').css('display', 'none');
@@ -331,7 +342,6 @@ function fixWrapperHeight() {
         $("#wrapper").css("min-height", $(window).height() - headerH + 'px');
     }
 }
-
 
 function setBodySmall() {
     if ($(this).width() < 769) {
