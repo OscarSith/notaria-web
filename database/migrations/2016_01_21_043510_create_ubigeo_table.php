@@ -17,7 +17,9 @@ class CreateUbigeoTable extends Migration
             $table->string('codigo', 6);
             $table->char('master', 5);
             $table->char('parent_id', 5);
-            $table->string('nombre');
+            $table->string('departamento');
+            $table->string('provincia');
+            $table->string('distrito');
             $table->timestamps();
         });
     }

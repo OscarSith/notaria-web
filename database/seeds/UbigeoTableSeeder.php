@@ -31,7 +31,7 @@ class UbigeoTableSeeder extends Seeder
 
                     if ((int) $dep_id == $depa_current) {
                         $provincia = str_pad($dep_id, 5, '0', STR_PAD_RIGHT);
-                        $result[] = ['codigo' => $dep_id, 'master' => $provincia, 'parent_id' => $departamento, 'nombre' => $dep_name];
+                        $result[] = ['codigo' => $dep_id, 'master' => $provincia, 'parent_id' => $departamento, 'departamento' => $dep_name, 'provincia' => '', 'distrito' => ''];
                         $depa_current++;
                         $prov_current = 1;
                         $dis_current = 1;
@@ -45,7 +45,7 @@ class UbigeoTableSeeder extends Seeder
 
                         if ((int) $prov_id == $prov_current) {
                             $master_prov = str_pad(($prov_id * 100) + $correlativo, 5, '0', STR_PAD_LEFT);
-                            $result[] = ['codigo' => $prov_id, 'master' => $master_prov, 'parent_id' => $provincia, 'nombre' => $prov_name];
+                            $result[] = ['codigo' => $dep_id.$prov_id, 'master' => $master_prov, 'parent_id' => $provincia, 'departamento' => $dep_name, 'provincia' => $prov_name, 'distrito' => ''];
                             $prov_current++;
                         }
                     }
@@ -55,7 +55,7 @@ class UbigeoTableSeeder extends Seeder
                         $dis_name = substr($sheet->distrito, 3, strlen($sheet->distrito) -3);
 
                         if ((int) $dis_id == $dis_current) {
-                            $result[] = ['codigo' => $dis_id, 'master' => str_pad($dis_id, 5, '0', STR_PAD_LEFT), 'parent_id' => $master_prov, 'nombre' => $dis_name];
+                            $result[] = ['codigo' => $dep_id.$prov_id.$dis_id, 'master' => str_pad($dis_id, 5, '0', STR_PAD_LEFT), 'parent_id' => $master_prov,  'departamento' => $dep_name, 'provincia' => $prov_name, 'distrito' => $dis_name];
                             $dis_current++;
                         } else {
                             $dis_current = 1;
@@ -65,7 +65,7 @@ class UbigeoTableSeeder extends Seeder
 
                             if ((int) $prov_id == $prov_current) {
                                 $master_prov = str_pad(($prov_id * 100) + $correlativo, 5, '0', STR_PAD_LEFT);
-                                $result[] = ['codigo' => $prov_id, 'master' => $master_prov, 'parent_id' => $provincia, 'nombre' => $prov_name];
+                                $result[] = ['codigo' => $dep_id.$prov_id, 'master' => $master_prov, 'parent_id' => $provincia, 'departamento' => $dep_name, 'provincia' => $prov_name, 'distrito' => ''];
                                 $prov_current++;
                             }
                             $cell = 2;
@@ -77,8 +77,8 @@ class UbigeoTableSeeder extends Seeder
                     }
                 }
             }
-            // print_r($result);
             // echo "<pre>";
+            // print_r($result);
             \DB::table('ubigeo')->insert($result);
             // echo "</pre>";
         });

@@ -10,6 +10,6 @@ class Ubigeo extends Model
 
     public function scopeGetByParentId($query, $parent_id)
     {
-    	return $query->where('parent_id', $parent_id)->get(['id', 'master', 'nombre']);
+    	return $query->where('parent_id', $parent_id)->get(['id', 'master', 'departamento', 'provincia', 'distrito']);
     }
 }

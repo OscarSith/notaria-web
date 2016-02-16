@@ -19,7 +19,7 @@ class CreatePersonaTable extends Migration
             $table->char('per_nacion', 4)->nullable();
             $table->char('per_dcmto_tipo', 4)->nullable();
             $table->char('per_sexo', 4)->nullable();
-            $table->string('per_dcmto_numero', 40)->nullable();
+            $table->string('per_dcmto_numero', 40)->unique()->nullable();
             $table->string('per_ruc', 40)->nullable();
             $table->string('per_ape_paterno', 120)->nullable();
             $table->string('per_ape_materno', 120)->nullable();

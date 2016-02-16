@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Http\Requests\PersonaRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\PersonaRepo;
 use App\Entities\Ubigeo;
@@ -34,7 +34,7 @@ class PersonaController extends Controller
         return view('persona-create', compact('departamentos'));
     }
 
-    public function store(Request $request)
+    public function store(PersonaRequest $request)
     {
         if ($this->personaRepo->add($request->all(), \Auth::user()->id)) {
             return redirect()->route('persona')->with(['success_message' => 'Persona agregada con exito.']);
@@ -46,8 +46,17 @@ class PersonaController extends Controller
     public function edit(Request $request, $id)
     {
         $persona = $this->personaRepo->getById($id);
+        $personaUbigeo = Ubigeo::find($persona->per_ubg_id, [
+            'codigo', 'parent_id', 'departamento', 'provincia', 'distrito'
+        ]);
         $departamentos = Ubigeo::getByParentId('00000');
-        return view('persona-edit', ['persona' => $persona, 'departamentos' => $departamentos]);
+        $provincias = Ubigeo::getByParentId($personaUbigeo->parent_id);
+        return view('persona-edit', [
+            'persona' => $persona,
+            'departamentos' => $departamentos,
+            'provincias' => $provincias,
+            'personaUbigeo' => $personaUbigeo
+        ]);
     }
 
     public function update(Request $request, $id)

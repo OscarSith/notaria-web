@@ -273,16 +273,19 @@ if ($departamento.length) {
             destiny = $this.data('destity'),
             $content = $(destiny)
             options = '<option>-Seleccione-</option>',
-            optionValue = '';
+            optionValue = '',
+            displayValue = '';
 
         $.getJSON(url_root + 'get-ubigeo-by-parent/' + valor, {}, function(rec) {
             for (var i = 0; i < rec.length; i++) {
                 if (destiny == '#distrito') {
                     optionValue = rec[i].id;
+                    displayValue = rec[i].distrito;
                 } else {
                     optionValue = rec[i].master;
+                    displayValue = rec[i].provincia;
                 }
-                options += '<option value="' + optionValue + '">' + rec[i].nombre + '</option>';
+                options += '<option value="' + optionValue + '">' + displayValue + '</option>';
             }
 
             $content.html(options);
