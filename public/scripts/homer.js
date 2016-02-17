@@ -303,6 +303,10 @@ if ($pro_tipo_per.length) {
 
     $pro_tipo_per.html(options);
 }
+var $select = $("select.js-source-states");
+if ($select.length) {
+    $select.select2();
+}
 
 $(window).bind("load", function () {
     // Remove splash screen after load

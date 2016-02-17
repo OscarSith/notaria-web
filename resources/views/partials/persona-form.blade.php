@@ -17,11 +17,11 @@
 	<div class="form-group">
 		<label class="control-label col-sm-2">Nacionalidad</label>
 		<div class="col-sm-4">
-			<select name="per_nacion" id="per_nacion" class="form-control" disabled {{ isset($persona) ? "data-nacion=$persona->per_nacion" : ''}}></select>
+			<select name="per_nacion" id="per_nacion" class="js-source-states" style="width: 100%" disabled {{ isset($persona) ? "data-nacion=$persona->per_nacion" : ''}}></select>
 		</div>
 		<label class="control-label col-sm-2">Tipo Documento</label>
 		<div class="col-sm-4">
-			<select name="per_dcmto_tipo" id="per_dcmto_tipo" class="form-control" disabled {{ isset($persona) ? "data-tipodoc=$persona->per_dcmto_tipo" : ''}}></select>
+			<select name="per_dcmto_tipo" id="per_dcmto_tipo" class="js-source-states" style="width: 100%" disabled {{ isset($persona) ? "data-tipodoc=$persona->per_dcmto_tipo" : ''}}></select>
 		</div>
 	</div>
 	<div class="form-group">
@@ -62,7 +62,7 @@
 		</div>
 		<label class="control-label col-sm-2 col-sm-offset-2">Sexo</label>
 		<div class="col-sm-4">
-			<select name="per_sexo" id="per_sexo" class="form-control" disabled {{ isset($persona) ? "data-sexo=$persona->per_sexo" : ''}}></select>
+			<select name="per_sexo" id="per_sexo" class="js-source-states" style="width: 100%" disabled {{ isset($persona) ? "data-sexo=$persona->per_sexo" : ''}}></select>
 		</div>
 	</div>
 </div>
@@ -91,7 +91,7 @@
 <div class="form-group">
 	<label class="control-label col-sm-2">Departamento</label>
 	<div class="col-sm-2">
-		<select id="departamento" class="form-control" data-destity="#provincia">
+		<select id="departamento" class="js-source-states" data-destity="#provincia" style="width: 100%">
 			<option>-Seleccione-</option>
 			@foreach ($departamentos as $departamento)
 				<?php $selected = ''; ?>
@@ -106,7 +106,7 @@
 	</div>
 	<label class="control-label col-sm-2">Provincia</label>
 	<div class="col-sm-2">
-		<select id="provincia" class="form-control" data-destity="#distrito">
+		<select id="provincia" class="js-source-states" style="width: 100%" data-destity="#distrito">
 			<option>-Seleccione-</option>
 			@if (isset($provincias))
 				@foreach($provincias as $provincia)
@@ -121,7 +121,7 @@
 	</div>
 	<label class="control-label col-sm-2">Distrito</label>
 	<div class="col-sm-2">
-		<select id="distrito" class="form-control" name="per_ubg_id">
+		<select id="distrito" class="js-source-states" name="per_ubg_id" style="width: 100%">
 			<option>-Seleccione-</option>
 		</select>
 	</div>

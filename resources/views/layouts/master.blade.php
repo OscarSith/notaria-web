@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('vendor/metisMenu/dist/metisMenu.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/animate.css/animate.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/select2-3.5.2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/select2-bootstrap/select2-bootstrap.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css') }}" />
@@ -319,6 +321,7 @@
 <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/iCheck/icheck.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('vendor/select2-3.5.2/select2.min.js') }}"></script>
 <script src="{{ asset('scripts/homer.js') }}"></script>
 <script>
     // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
