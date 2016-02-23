@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Helpers;
+use App\Entities\Ubigeo;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $departamentos = Ubigeo::getByParentId('00000');
+        return view('home', compact('departamentos'));
     }
 
     public function getMasterOfTables()

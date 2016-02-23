@@ -190,8 +190,8 @@ if ($listPersonas.length) {
     }
 }
 
-var selected = '<option>Seleccione</option>';
-var $per_dcmto_tipo = $('#per_dcmto_tipo');
+var selected = '<option>Seleccione T. Documento</option>';
+var $per_dcmto_tipo = $('.per_dcmto_tipo');
 if ($per_dcmto_tipo.length) {
     var options = selected,
         edit = $per_dcmto_tipo.data('tipodoc');
@@ -265,12 +265,13 @@ if ($per_sexo.length) {
     }
 }
 
-var $departamento = $('#departamento');
+var $departamento = $('.departamento');
 if ($departamento.length) {
-    $.merge($departamento, $('#provincia')).on('change', function() {
+    $.merge($departamento, $('.provincia')).on('change', function() {
         var $this = $(this),
             valor = $this.val(),
             destiny = $this.data('destity'),
+            area = $this.data('area'),
             $content = $(destiny)
             options = '<option>-Seleccione-</option>',
             optionValue = '',
@@ -278,7 +279,7 @@ if ($departamento.length) {
 
         $.getJSON(url_root + 'get-ubigeo-by-parent/' + valor, {}, function(rec) {
             for (var i = 0; i < rec.length; i++) {
-                if (destiny == '#distrito') {
+                if (area == 'distrito') {
                     optionValue = rec[i].id;
                     displayValue = rec[i].distrito;
                 } else {
@@ -293,9 +294,9 @@ if ($departamento.length) {
     });
 }
 
-var $pro_tipo_per = $('#pro_tipo_per');
+var $pro_tipo_per = $('.pro_tipo_per');
 if ($pro_tipo_per.length) {
-    var options = selected;
+    var options = '<option value="">Seleccione Tipo Persona</option>';
 
     for (var i = 0; i < tipo_per.length; i++) {
         options += '<option value="' + tipo_per[i].ttb_arg + '">' + tipo_per[i].ttb_val1 + '</option>';
@@ -303,6 +304,18 @@ if ($pro_tipo_per.length) {
 
     $pro_tipo_per.html(options);
 }
+
+var $pro_moneda = $('.pro_moneda');
+if ($pro_moneda.length) {
+    var options = '<option value="">Seleccione Moneda</option>';
+
+    for (var i = 0; i < moneda.length; i++) {
+        options += '<option value="' + moneda[i].ttb_arg + '">' + moneda[i].ttb_val1 + '</option>';
+    }
+
+    $pro_moneda.html(options);
+}
+
 var $select = $("select.js-source-states");
 if ($select.length) {
     $select.select2();

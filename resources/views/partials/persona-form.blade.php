@@ -21,7 +21,7 @@
 		</div>
 		<label class="control-label col-sm-2">Tipo Documento</label>
 		<div class="col-sm-4">
-			<select name="per_dcmto_tipo" id="per_dcmto_tipo" class="js-source-states" style="width: 100%" disabled {{ isset($persona) ? "data-tipodoc=$persona->per_dcmto_tipo" : ''}}></select>
+			<select name="per_dcmto_tipo" id="per_dcmto_tipo" class="js-source-states per_dcmto_tipo" style="width: 100%" disabled {{ isset($persona) ? "data-tipodoc=$persona->per_dcmto_tipo" : ''}}></select>
 		</div>
 	</div>
 	<div class="form-group">
@@ -91,7 +91,7 @@
 <div class="form-group">
 	<label class="control-label col-sm-2">Departamento</label>
 	<div class="col-sm-2">
-		<select id="departamento" class="js-source-states" data-destity="#provincia" style="width: 100%">
+		<select id="departamento" class="js-source-states departamento" data-destity="#provincia" style="width: 100%" data-area="provincia">
 			<option>-Seleccione-</option>
 			@foreach ($departamentos as $departamento)
 				<?php $selected = ''; ?>
@@ -106,7 +106,7 @@
 	</div>
 	<label class="control-label col-sm-2">Provincia</label>
 	<div class="col-sm-2">
-		<select id="provincia" class="js-source-states" style="width: 100%" data-destity="#distrito">
+		<select id="provincia" class="js-source-states provincia" style="width: 100%" data-destity="#distrito" data-area="distrito">
 			<option>-Seleccione-</option>
 			@if (isset($provincias))
 				@foreach($provincias as $provincia)
