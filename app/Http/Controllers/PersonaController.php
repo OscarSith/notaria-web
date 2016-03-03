@@ -74,4 +74,10 @@ class PersonaController extends Controller
 
         return response()->json($departamentos);
     }
+
+    public function autocomplete(Request $request)
+    {
+        $result = $this->personaRepo->search($request->input('per_tipo'), $request->input('per_dcmto_tipo'), $request->input('query'));
+        return response()->json(['suggestions' => $result]);
+    }
 }

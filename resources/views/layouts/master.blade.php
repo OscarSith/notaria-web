@@ -322,6 +322,7 @@
 <script src="{{ asset('vendor/iCheck/icheck.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('vendor/select2-3.5.2/select2.min.js') }}"></script>
+<script src="{{ asset('scripts/jquery.autocomplete.js') }}"></script>
 <script src="{{ asset('scripts/homer.js') }}"></script>
 <script>
     // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -15,17 +15,18 @@
                     <h3 class="page-header">Solicita</h3>
                     <div class="form-group">
                         <div class="col-sm-2">
-                            <select name="per_tipo" id="pro_tipo_per" class="form-control pro_tipo_per"></select>
+                            <select name="per_tipo" id="pro_tipo_per" class="form-control pro_tipo_per js-source-states" style="width:100%"></select>
                         </div>
                         <div class="col-sm-2">
-                            <select id="sol_per_dcmto_tipo" class="form-control per_dcmto_tipo" name="per_dcmto_tipo"></select>
+                            <select id="sol_per_dcmto_tipo" class="form-control per_dcmto_tipo js-source-states" name="per_dcmto_tipo" style="width:100%"></select>
                         </div>
                         <div class="col-sm-2">
                             <input type="text" class="form-control" name="doc_num" placeholder="Número">
                         </div>
                         <label class="control-label col-sm-2">Buscar por</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" placeholder="Razon Social">
+                            <input type="text" class="form-control search-autocom" placeholder="Razon Social">
+                            <input type="hidden" name="pro_solicita_per_id" id="pro_solicita_per_id">
                         </div>
                     </div>
                     <h3 class="page-header">Girador</h3>
@@ -83,55 +84,135 @@
                     <h3 class="page-header">Documento</h3>
                     <div class="form-group">
                         <div class="col-sm-3">
-                            <input type="text" name="pro_titulo" id="pro_titulo" class="form-control" placeholder="Titulo">
+                            {!! Form::text('pro_titulo', null, ['class' => 'form-control', 'placeholder' => 'Titulo', 'id' => 'pro_titulo', 'required']) !!}
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="pro_dcmto_numero" id="pro_dcmto_numero" class="form-control" placeholder="Número">
+                            {!! Form::text('pro_dcmto_numero', null, ['class' => 'form-control', 'placeholder' => 'Número', 'id' => 'pro_dcmto_numero', 'required']) !!}
                         </div>
                         <div class="col-sm-3">
                             <select name="pro_moneda" id="pro_moneda" class="pro_moneda form-control js-source-states" style="width: 100%"></select>
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="pro_importe" id="pro_importe" class="form-control" placeholder="Importe">
+                            {!! Form::text('pro_importe', null, ['class' => 'form-control', 'placeholder' => 'Importe', 'id' => 'pro_importe', 'required']) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-3">
-                            <input type="text" name="pro_fe_dcmto_emite" id="pro_fe_dcmto_emite" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" placeholder="Fecha Letra">
+                            {!! Form::text('pro_fe_dcmto_emite', null, [
+                                'class' => 'form-control',
+                                'placeholder' => 'Fecha Letra',
+                                'id' => 'pro_fe_dcmto_emite',
+                                'data-provide' => "datepicker",
+                                'data-date-format'=>"dd/mm/yyyy",
+                                'required']) !!}
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="pro_fe_dcmto_vence" id="pro_fe_dcmto_vence" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" placeholder="Vencimiento">
+                            {!! Form::text('pro_fe_dcmto_vence', null, [
+                                'class' => 'form-control',
+                                'placeholder' => 'Vencimiento',
+                                'id' => 'pro_fe_dcmto_vence',
+                                'data-provide' => "datepicker",
+                                'data-date-format' => "dd/mm/yyyy",
+                                'required']) !!}
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="pro_fe_ingreso" id="pro_fe_ingreso" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" placeholder="Ingreso" value="{{ Carbon\Carbon::now()->format('d/m/Y')}}">
+                            {!! Form::text('pro_fe_ingreso', Carbon\Carbon::now()->format('d/m/Y'), [
+                                'class' => 'form-control',
+                                'id' => 'pro_fe_ingreso',
+                                'data-provide' => "datepicker",
+                                'data-date-format' => "dd/mm/yyyy",
+                                'required']) !!}
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="pro_fe_notificacion" id="pro_fe_notificacion" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" placeholder="F. Notificación">
+                            {!! Form::text('pro_fe_notificacion', null, [
+                                'class' => 'form-control',
+                                'placeholder' => 'F. Notificación',
+                                'id' => 'pro_fe_notificacion',
+                                'data-provide' => "datepicker",
+                                'data-date-format' => "dd/mm/yyyy",
+                                'required']) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-3">
-                            <input type="text" name="pro_fe_constancia" id="pro_fe_constancia" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" placeholder="F. Constancia">
+                            {!! Form::text('pro_fe_constancia', null, [
+                                'class' => 'form-control',
+                                'placeholder' => 'F. Constancia',
+                                'id' => 'pro_fe_constancia',
+                                'data-provide' => "datepicker",
+                                'data-date-format' => "dd/mm/yyyy",
+                                'required']) !!}
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="pro_num_ingreso" id="pro_num_ingreso" class="form-control" placeholder="Número Ingreso">
+                            {!! Form::text('pro_num_ingreso', null, ['class' => 'form-control', 'id' => 'pro_num_ingreso', 'placeholder' => 'Número Ingreso']) !!}
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="pro_num_acta" id="pro_num_acta" class="form-control" placeholder="Número Acta">
+                            {!! Form::text('pro_num_acta', null, ['class' => 'form-control', 'id' => 'pro_num_acta', 'placeholder' => 'Número Acta']) !!}
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="pro_num_instrumento" id="pro_num_instrumento" class="form-control" placeholder="Número Instrumento">
+                            {!! Form::text('pro_num_instrumento', null, ['class' => 'form-control', 'id' => 'pro_num_instrumento', 'placeholder' => 'Número Instrumento']) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-3">
-                            <input type="text" name="pro_clase" id="pro_clase" class="form-control" placeholder="Clase">
+                            {!! Form::text('pro_clase', null, ['class' => 'form-control', 'id' => 'pro_clase', 'placeholder' => 'Clase']) !!}
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="pro_modelo" id="pro_modelo" class="form-control" placeholder="Modelo">
+                            {!! Form::text('pro_modelo', null, ['class' => 'form-control', 'id' => 'pro_modelo', 'placeholder' => 'Modelo']) !!}
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="pro_num_acta" id="pro_num_acta" class="form-control" placeholder="Número Acta">
+                            {!! Form::text('pro_num_acta', null, ['class' => 'form-control', 'id' => 'pro_num_acta', 'placeholder' => 'Número Acta']) !!}
+                        </div>
+                    </div>
+                    <h3 class="page-header">Acepta</h3>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <select name="per_tipo" id="ace_pro_tipo_per" class="form-control js-source-states pro_tipo_per" style="width:100%"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select id="ace_per_dcmto_tipo" class="form-control js-source-states per_dcmto_tipo" name="per_dcmto_tipo" style="width:100%"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="ace_doc_num" placeholder="Número">
+                        </div>
+                        <label class="control-label col-sm-2">Buscar por</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" placeholder="Razon Social">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Departamento</label>
+                        <div class="col-sm-2">
+                            <select id="ace_departamento" class="js-source-states departamento" data-destity="#ace_provincia" style="width: 100%" data-area="provincia">
+                                <option>-Seleccione-</option>
+                                @foreach ($departamentos as $departamento)
+                                    <?php $selected = ''; ?>
+                                    @if (isset($personaUbigeo))
+                                        @if ($departamento->departamento == $personaUbigeo->departamento)
+                                            <?php $selected = 'selected'; ?>
+                                        @endif
+                                    @endif
+                                    <option value="{{ $departamento->master }}" {{ $selected }}>{{ $departamento->departamento }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2">Provincia</label>
+                        <div class="col-sm-2">
+                            <select id="ace_provincia" class="js-source-states provincia" style="width: 100%" data-destity="#ace_distrito" data-area="distrito">
+                                <option>-Seleccione-</option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2">Distrito</label>
+                        <div class="col-sm-2">
+                            <select id="ace_distrito" class="js-source-states" name="per_ubg_id" style="width: 100%">
+                                <option>-Seleccione-</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ace_firma" class="control-label col-sm-2">Firma</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="ace_firma">
                         </div>
                     </div>
                     {!! Form::close() !!}

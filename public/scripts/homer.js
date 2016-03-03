@@ -321,6 +321,21 @@ if ($select.length) {
     $select.select2();
 }
 
+$('.search-autocom').autocomplete({
+    serviceUrl: '/buscar-personas',
+    dataType: 'json',
+    minChars: 3,
+    autoSelectFirst: true,
+    onSelect: function(q) {
+        // console.info(q);
+        $(this).val(q.per_ape_paterno + ' ' + q.per_ape_materno + ' ' + q.per_nombre1);
+        $('#pro_solicita_per_id').val(q.data);
+    }
+});
+$('#pro_tipo_per, #sol_per_dcmto_tipo').on('change', function() {
+    $('.search-autocom').autocomplete().setOptions({params: {'per_tipo': $('#pro_tipo_per').val(), 'per_dcmto_tipo': $('#sol_per_dcmto_tipo').val()}});
+});
+
 $(window).bind("load", function () {
     // Remove splash screen after load
     $('.splash').css('display', 'none');

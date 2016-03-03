@@ -58,4 +58,9 @@ class PersonaRepo extends Persona
 
 		return $alfabetico;
 	}
+
+	public function search($tipop, $tipod, $query)
+	{
+		return Persona::where('per_tipo', $tipop)->where('per_dcmto_tipo', $tipod)->where('per_alfabetico', 'like', '%' . $query . '%')->take(10)->get(['id AS data', 'per_alfabetico AS value', 'per_ape_paterno', 'per_ape_materno', 'per_nombre1']);
+	}
 }

@@ -44,6 +44,7 @@ Route::group(['middleware' => ['web', 'auth']], function ($route) {
     // AJAX
     $route->get('master-tables', 'HomeController@getMasterOfTables');
     $route->get('get-ubigeo-by-parent/{parent_id}', 'PersonaController@ubigeo');
+    $route->get('buscar-personas', 'PersonaController@autocomplete');
 
     $this->get('logout', 'Auth\AuthController@logout');
 
